@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toon3D Dataset Directory</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .directory-list {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+        }
+
+        .directory-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+
+        .directory-item:last-child {
+            border-bottom: none;
+        }
+
+        .directory-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .directory-icon {
+            margin-right: 1rem;
+            color: #666;
+        }
+
+        .directory-name {
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .directory-name:hover {
+            text-decoration: underline;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #0366d6;
+            box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Toon3D Dataset Directory</h1>
+    <input type="text" class="search-box" placeholder="Search directories..." id="searchInput">
+    <div class="directory-list" id="directoryList">
+        <!-- Directories will be populated here by JavaScript -->
+    </div>
+
+    <script>
+        // List of directories
+        const directories = [
+            'avatar-house',
+            'bojak-room',
+            'bobs-burgers',
+            'family-guy-dining',
+            'family-guy-house',
+            'krusty-krab',
+            'magic-school-bus',
+            'mystery-machine',
+            'planet-express',
+            'simpsons-house',
+            'smith-residence',
+            'spirited-away'
+        ];
+
+        // Function to create directory items
+        function createDirectoryItems(dirs) {
+            const directoryList = document.getElementById('directoryList');
+            directoryList.innerHTML = '';
+
+            dirs.forEach(dir => {
+                const item = document.createElement('div');
+                item.className = 'directory-item';
+
+                const icon = document.createElement('span');
+                icon.className = 'directory-icon';
+                icon.innerHTML = '📁';
+
+                const link = document.createElement('a');
+                link.href = `./${dir}/`;
+                link.className = 'directory-name';
+                link.textContent = dir;
+
+                item.appendChild(icon);
+                item.appendChild(link);
+                directoryList.appendChild(item);
+            });
+        }
+
+        // Initialize the directory list
+        createDirectoryItems(directories);
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredDirs = directories.filter(dir =>
+                dir.toLowerCase().includes(searchTerm)
+            );
+            createDirectoryItems(filteredDirs);
+        });
+    </script>
+</body>
+
+</html>
